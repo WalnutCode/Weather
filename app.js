@@ -9,8 +9,9 @@ $(".submit").on("click",function(event){
   event.preventDefault()
   console.log("submit button clicked")
   var yourCity = $("#exampleFormControlInput1").val().trim()
+  var numberOfDays = $("#exampleFormControlSelect1").val().trim()
   $.ajax({
-    url: "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=5913c4c25fb74c86bbe133215180710&q="+yourCity+"&format=json&num_of_days=5",
+    url: "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=5913c4c25fb74c86bbe133215180710&q="+yourCity+"&format=json&num_of_days="+numberOfDays,
     
   })
     .done(function( response ) {
@@ -29,7 +30,7 @@ $(".submit").on("click",function(event){
           } 
           $(".NYCWeather").append("<div class='alert alert-primary role='alert'>Date: "+dateAlert+ "</div>")
           //console.log("temperature " +weather[i].mintempF +"-"+ weather[i].maxtempF)
-          $(".NYCWeather").append("<div> Temperature: "+weather[i].mintempF +"-"+ weather[i].maxtempF+"</div>")
+          $(".NYCWeather").append("<div class='styleTemp'> Temperature: "+weather[i].mintempF +"-"+ weather[i].maxtempF+"</div>")
           var sun = weather[i].astronomy
         for (var ind=0; ind<sun.length; ind++){
             console.log("Sunrise "+ sun[ind].sunrise + " Sunset " + sun[ind].sunset)
@@ -39,6 +40,7 @@ $(".submit").on("click",function(event){
       
     });
   console.log($("#exampleFormControlInput1").val())
+  console.log(numberOfDays)
 })  
 
   });
